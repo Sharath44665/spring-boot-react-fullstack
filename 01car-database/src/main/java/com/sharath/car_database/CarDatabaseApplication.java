@@ -39,18 +39,18 @@ public class CarDatabaseApplication implements CommandLineRunner {
 		ownerRepository.saveAll(Arrays.asList(owner0, owner1, owner2, owner3, owner4 ));
 
 		carRepository.save(new Car("Ford", "Mustang", "Red",
-				"ADF-1121", 2023, 59000, owner0));
+				"ADF-1121", 2023, 59000 ));
 		carRepository.save(new Car("Nissan", "Leaf", "White",
-				"SSJ-3002", 2020, 29000, owner1));
+				"SSJ-3002", 2020, 29000 ));
 		carRepository.save(new Car("Toyota", "Prius",
-				"Silver", "KKO-0212", 2022, 39000, owner2));
+				"Silver", "KKO-0212", 2022, 39000 ));
 
 		carRepository.save(new Car("Ford", "Mustang", "yellow",
-				"ADF-1121", 2022, 55000, owner3));
+				"ADF-1121", 2022, 55000 ));
 		carRepository.save(new Car("Ford", "Focus", "white",
-				"PAS-1122", 2020, 55000, owner4));
+				"PAS-1122", 2020, 55000 ));
 		carRepository.save(new Car("Toyota", "Innova", "White",
-				"KA-1121", 2023, 59000, owner0));
+				"KA-1121", 2023, 59000 ));
 
 
 		for(Car car : carRepository.findAll()){
