@@ -20,3 +20,8 @@ db:
 
 ![login postman](./img/login_using_postman.png)
 
+### Securing the login
+
+![successLogin](./img/loginUsingJsonSuccess.png)
+
+![failLogin](./img/loginUsingJsonFail.png)
