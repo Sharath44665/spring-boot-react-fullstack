@@ -14,33 +14,41 @@ public class Car {
     private String brand, model, color, registrationNumber;
     private int modelYear, price;
 
-//    @ManyToOne(fetch=FetchType.LAZY)
-//    @JoinColumn(name="owner")
-//    private Owner owner;
-    @ManyToMany
-    private Set<Owner> owners = new HashSet<Owner>();
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="owner")
+    private Owner owner;
+//    @ManyToMany
+//    private Set<Owner> owners = new HashSet<Owner>();
 
 
 
     public Car() {
     }
 
-    public Car(String brand, String model, String color, String registrationNumber, int modelYear, int price) {
+    public Car(String brand, String model, String color, String registrationNumber, int modelYear, int price, Owner owner) {
         this.brand = brand;
         this.model = model;
         this.color = color;
         this.registrationNumber = registrationNumber;
         this.modelYear = modelYear;
         this.price = price;
-//        this.owner= owner;
+        this.owner= owner;
     }
 
-    public Set<Owner> getOwners() {
-        return owners;
+//    public Set<Owner> getOwners() {
+//        return owners;
+//    }
+//
+//    public void setOwners(Set<Owner> owners) {
+//        this.owners = owners;
+//    }
+
+    public Owner getOwner() {
+        return owner;
     }
 
-    public void setOwners(Set<Owner> owners) {
-        this.owners = owners;
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     public long getId() {
