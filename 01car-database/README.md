@@ -9,3 +9,14 @@ check this url: `http://localhost:9098/api/`
 ### swagger ui 
 
 check this location: `http://localhost:9098/swagger-ui/index.html`
+
+### loggin in using admin
+
+db:
+
+![db](./img/app_user_db.png)
+
+![start err ](./img/startError.png)
+
+![login postman](./img/login_using_postman.png)
+

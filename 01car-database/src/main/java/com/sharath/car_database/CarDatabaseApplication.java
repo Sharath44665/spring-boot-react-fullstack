@@ -1,9 +1,6 @@
 package com.sharath.car_database;
 
-import com.sharath.car_database.domain.Car;
-import com.sharath.car_database.domain.CarRepository;
-import com.sharath.car_database.domain.Owner;
-import com.sharath.car_database.domain.OwnerRepository;
+import com.sharath.car_database.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -17,10 +14,12 @@ public class CarDatabaseApplication implements CommandLineRunner {
 	private static final Logger logger = LoggerFactory.getLogger(CarDatabaseApplication.class);
 	private final CarRepository carRepository;
 	private final OwnerRepository ownerRepository;
+	private final AppUserRepository appUserRepository;
 
-    public CarDatabaseApplication(CarRepository carRepository, OwnerRepository ownerRepository) {
+    public CarDatabaseApplication(CarRepository carRepository, OwnerRepository ownerRepository, AppUserRepository appUserRepository) {
         this.carRepository = carRepository;
         this.ownerRepository = ownerRepository;
+        this.appUserRepository = appUserRepository;
     }
 
     public static void main(String[] args) {
@@ -43,7 +42,7 @@ public class CarDatabaseApplication implements CommandLineRunner {
 		carRepository.save(new Car("Nissan", "Leaf", "White",
 				"SSJ-3002", 2020, 29000, owner1 ));
 		carRepository.save(new Car("Toyota", "Prius",
-				"Silver", "KKO-0212", 2022, 39000, owner2 ));
+				"Silver", "KKO-0212", 2022, 39000, owner1 ));
 
 		carRepository.save(new Car("Ford", "Mustang", "yellow",
 				"ADF-1121", 2022, 55000, owner3 ));
@@ -51,6 +50,13 @@ public class CarDatabaseApplication implements CommandLineRunner {
 				"PAS-1122", 2020, 55000 , owner4));
 		carRepository.save(new Car("Toyota", "Innova", "White",
 				"KA-1121", 2023, 59000 , owner0));
+
+
+		// password user
+		appUserRepository.save( new AppUser("demouser", "$2a$10$NVM0n8ElaRgg7zWO1CxUdei7vWoPg91Lz2aYavh9. f9q0e4bRadue","USER"));
+
+		// password: admin
+		appUserRepository.save( new AppUser("admin", "$2a$10$8cjz47bjbR4Mn8GMg9IZx.vyjhLXR/SKKMSZ9.mP9vpMu0ssKi8GW","ADMIN"));
 
 
 		for(Car car : carRepository.findAll()){
