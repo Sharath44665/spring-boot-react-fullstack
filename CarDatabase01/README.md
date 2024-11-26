@@ -37,3 +37,12 @@ yes we need to pass in the header value ( authorization as shown in the second p
 - login with header and access cars
 
 ![header](./img/twoSecuringWithRequestsHeader.png)
+
+### Handling Exception
+
+handle exceptions during invalid credentials
+
+![handle exception](./img/exceptionhandleLoginPost.png)
+
+
+

@@ -1,5 +1,6 @@
 package com.sharath.car_database.config;
 
+import com.sharath.car_database.AuthEntryPoint;
 import com.sharath.car_database.AuthenticationFilter;
 import com.sharath.car_database.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -21,10 +22,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationFilter authenticationFilter;
+    private final AuthEntryPoint exceptionHandler;
 
-    public SecurityConfig(UserDetailsServiceImpl userDetailsService, AuthenticationFilter authenticationFilter) {
+    public SecurityConfig(UserDetailsServiceImpl userDetailsService, AuthenticationFilter authenticationFilter, AuthEntryPoint exceptionHandler) {
         this.userDetailsService = userDetailsService;
         this.authenticationFilter = authenticationFilter;
+		this.exceptionHandler = exceptionHandler;
     }
 
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -60,7 +63,8 @@ public class SecurityConfig {
         })
                 .sessionManagement((sessionManagement) -> {sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS);})
                 .authorizeHttpRequests((authorizeHttpReq) -> authorizeHttpReq.requestMatchers(HttpMethod.POST, "/login").permitAll().anyRequest().authenticated())
-                .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling((exeptionHandling) -> exeptionHandling.authenticationEntryPoint(exceptionHandler));
         return http.build();
 
     }
