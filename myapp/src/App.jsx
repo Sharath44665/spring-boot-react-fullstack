@@ -7,12 +7,12 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div>
+    <>
 
     
     <h1>Hello world</h1>
     <p>this is my first React Component</p>
-    </div>
+    </>
   );
 }
 
