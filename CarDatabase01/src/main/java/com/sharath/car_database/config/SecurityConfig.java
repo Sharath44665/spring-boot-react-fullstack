@@ -1,5 +1,6 @@
 package com.sharath.car_database.config;
 
+import com.sharath.car_database.AuthenticationFilter;
 import com.sharath.car_database.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,14 +14,17 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
     private final UserDetailsServiceImpl userDetailsService;
+    private final AuthenticationFilter authenticationFilter;
 
-    public SecurityConfig(UserDetailsServiceImpl userDetailsService) {
+    public SecurityConfig(UserDetailsServiceImpl userDetailsService, AuthenticationFilter authenticationFilter) {
         this.userDetailsService = userDetailsService;
+        this.authenticationFilter = authenticationFilter;
     }
 
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -55,8 +59,10 @@ public class SecurityConfig {
 
         })
                 .sessionManagement((sessionManagement) -> {sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS);})
-                .authorizeHttpRequests((authorizeHttpReq) -> authorizeHttpReq.requestMatchers(HttpMethod.POST, "/login").permitAll().anyRequest().authenticated());
+                .authorizeHttpRequests((authorizeHttpReq) -> authorizeHttpReq.requestMatchers(HttpMethod.POST, "/login").permitAll().anyRequest().authenticated())
+                .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
 
     }
+
 }
