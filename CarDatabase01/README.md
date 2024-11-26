@@ -40,7 +40,7 @@ yes we need to pass in the header value ( authorization as shown in the second p
 
 ### Handling Exception
 
-handle exceptions during invalid credentials
+handle exceptions during invalid credentials, please note that in the body we need to pass json credentials unfortunately its not shown in the following screenshot!
 
 ![handle exception](./img/exceptionhandleLoginPost.png)
 

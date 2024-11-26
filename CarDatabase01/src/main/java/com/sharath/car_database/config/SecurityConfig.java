@@ -3,6 +3,9 @@ package com.sharath.car_database.config;
 import com.sharath.car_database.AuthEntryPoint;
 import com.sharath.car_database.AuthenticationFilter;
 import com.sharath.car_database.service.UserDetailsServiceImpl;
+
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,6 +19,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -61,12 +68,32 @@ public class SecurityConfig {
             csrf.disable();
 
         })
+        .cors(withDefaults())
                 .sessionManagement((sessionManagement) -> {sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS);})
                 .authorizeHttpRequests((authorizeHttpReq) -> authorizeHttpReq.requestMatchers(HttpMethod.POST, "/login").permitAll().anyRequest().authenticated())
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling((exeptionHandling) -> exeptionHandling.authenticationEntryPoint(exceptionHandler));
         return http.build();
 
+    }
+    
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+    	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    	CorsConfiguration config = new CorsConfiguration();
+    	
+    	config.setAllowedOrigins(Arrays.asList("*"));
+    	
+    	// only localhost:3000 is allowed
+//    	config.setAllowedOrigins(Arrays.asList ("http://localhost:3000"));
+    	config.setAllowedMethods(Arrays.asList("*"));
+    	config.setAllowedHeaders(Arrays.asList("*"));
+    	config.setAllowCredentials(false);
+    	config.applyPermitDefaultValues();
+    	
+    	source.registerCorsConfiguration("/**", config);
+    	return (CorsConfigurationSource) source;
+    	
     }
 
 }
