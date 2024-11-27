@@ -4,6 +4,8 @@ import { useState } from "react";
 function Square({value, onSquareClick}){
   return <button className="square" onClick={onSquareClick} >{value}</button>
 }
+
+// main fn
 export default function Board() {
   const [xisNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null)); //Array(9).fill(null) creates an array with nine elements and sets each of them to null
@@ -65,11 +67,17 @@ function calculateWinner(squares){
 
   for(let idx =0; idx < lines.length; idx += 1){
     const [a, b, c] = lines[idx];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]){
+    
+    // Check that the row or column or diagonal is equal or not.
+    // example we got [3, 4, 5]
+    // now we check square[3] === square[4] or square[3] === square[5]
+    // then return square[3]
+    if (squares[a] === squares[b] && squares[a] === squares[c]){
       return squares[a];
     }
   }
   return null;
 }
+
 
 
