@@ -1,38 +1,27 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
 import './App.css'
 
-
 function App() {
-  // const [count, setCount] = useState(0)
-  const products = [
-    { title: 'Cabbage', isFruit: false, id: 1 },
-    { title: 'Garlic', isFruit: false, id: 2 },
-    { title: 'Apple', isFruit: true, id: 3 },
-  ];
+  return(
+  <>
+  <h1>Counters updated seperately</h1>
   
-  const listItems = products.map((prod) => { return (
-    <li
-    key = {prod.id}
-    style = {{color: prod.isFruit ? 'magenta' : 'darkgreen'}}
-    >
-      {prod.title}
-    </li>
-    );
+  <MyBtn/>
+  <MyBtn/>
 
-  });
- 
-  
-  return (
-    <>
-    <ul>
-    {listItems}
-    </ul>
-    
-
-    </>
-  );
+  </>
+ );
 }
+
+function MyBtn(){
+  const [count, setCount] = useState(0);
+  function handleClick(){
+    setCount(count +1)
+  }
+  return (<button onClick={handleClick}>Clicked {count} times</button>);
+}
+
 
 export default App
