@@ -5,13 +5,17 @@ import './App.css'
 
 function App() {
   // const [count, setCount] = useState(0)
-
+ 
+  const myArr = ['apple', 'banana', 'orange']
+  const myList = myArr.map((item) => <p>{item}</p>);
+  
   return (
     <>
 
     
-    <h1>Hello world</h1>
-    <p>this is my first React Component</p>
+    {myList}
+
+    
     </>
   );
 }
