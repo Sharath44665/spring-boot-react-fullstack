@@ -9,6 +9,9 @@ export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null)); //Array(9).fill(null) creates an array with nine elements and sets each of them to null
 
   function handleClick(i){
+    if (squares[i]){
+      return
+    }
     const nextSquares = squares.slice();
     if (xisNext){
       nextSquares[i] = "X"
