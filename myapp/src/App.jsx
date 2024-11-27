@@ -1,32 +1,27 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0);
-
-  function handleClick() {
-    setCount(count + 1);
-  }
-  return(
-  <>
-  <h1>Counters updated together</h1>
-  
-  <MyBtn myCounter={count} demoEvent={handleClick} />
-  <MyBtn myCounter={count} demoEvent={handleClick} />
-
-  </>
- );
+function Square({value}){
+  return <button className="square">{value}</button>
 }
-
-function MyBtn({ myCounter, demoEvent }) {
+export default function Board() {
   return (
-    <button onClick={demoEvent}>
-      Clicked {myCounter} times
-    </button>
-  );
+    <>
+    <div className="board-row">
+      <Square value="1"/>
+      <Square value="2"/>
+      <Square value="3"/>
+    </div>
+    <div className="board-row">
+      <Square value="4"/>
+      <Square value="5"/>
+      <Square value="6"/>
+    </div>
+    <div className="board-row">
+      <Square value="7"/>
+      <Square value="8"/>
+      <Square value="9"/>
+    </div>
+    
+    </>
+  
+);
 }
-
-
-export default App
