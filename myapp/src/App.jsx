@@ -4,23 +4,28 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
   return(
   <>
-  <h1>Counters updated seperately</h1>
+  <h1>Counters updated together</h1>
   
-  <MyBtn/>
-  <MyBtn/>
+  <MyBtn myCounter={count} demoEvent={handleClick} />
+  <MyBtn myCounter={count} demoEvent={handleClick} />
 
   </>
  );
 }
 
-function MyBtn(){
-  const [count, setCount] = useState(0);
-  function handleClick(){
-    setCount(count +1)
-  }
-  return (<button onClick={handleClick}>Clicked {count} times</button>);
+function MyBtn({ myCounter, demoEvent }) {
+  return (
+    <button onClick={demoEvent}>
+      Clicked {myCounter} times
+    </button>
+  );
 }
 
 
