@@ -5,12 +5,25 @@ function Square({value, onSquareClick}){
   return <button className="square" onClick={onSquareClick} >{value}</button>
 }
 export default function Board() {
+  const [xisNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null)); //Array(9).fill(null) creates an array with nine elements and sets each of them to null
 
   function handleClick(i){
     const nextSquares = squares.slice();
-    nextSquares[i] = "X"
+    if (xisNext){
+      nextSquares[i] = "X"
+    }
+    else{
+      nextSquares[i] ="O"
+    }
+
     setSquares(nextSquares)
+    setXIsNext(!xisNext)
+    // console.log(squares) // [null 9 times]
+    // const nextSquares = squares.slice(); //slice: Returns a copy of a section of an array, here nothing mentioned like start or end, so returns the latest updated array.
+    // nextSquares[i] = "X"
+    // console.log(nextSquares) // [X for clicked ones ]
+    // setSquares(nextSquares)
   }
   return (
     <>
